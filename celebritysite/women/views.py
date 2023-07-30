@@ -1,17 +1,21 @@
 from django.http import Http404, HttpResponse, HttpResponseNotFound
 from django.shortcuts import redirect, render
-from django.urls import re_path
 
 from .models import Women
 
-menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
+menu = [{'title': "О сайте", "url_name": "about"},
+        {'title': "Добавить статью", "url_name": "add_page"},
+        {'title': "Обратная связь", "url_name": "contact"},
+        {'title': "Войти", "url_name": "login"},
+        ]
 
 
 def index(request):
+    posts = Women.objects.all()
     context = {
-        "title": "Главная страница",
+        "posts": posts,
         "menu": menu,
-        "posts": Women.objects.all(),
+        "title": "Главная страница",
     }
     return render(request, "women/index.html", context=context)
 
@@ -24,16 +28,31 @@ def about(request):
     return render(request, "women/about.html", context=context)
 
 
-def categories(request, catid: int):
-    print(request.GET)
-    return HttpResponse(f"<h1>Статьи по категориям</h1><p>{catid}</p>")
+def addpage(request):
+    return HttpResponse("Новая страница")
+    # context = {
+    # "title": "О сайте",
+    # "menu": menu,
+    # }
+    # return render(request, "women/addpage.html", context=context)
 
 
-def archive(request, year: re_path):
-    if int(year) > 2023:
-        # raise Http404()
-        return redirect("/", permanent=False)
-    return HttpResponse(f"<h1>Архив по годам</h1><p>{year}</p>")
+def contact(request):
+    return HttpResponse("Новая страница")
+    # context = {
+    #     # "title": "О сайте",
+    #     # "menu": menu,
+    # }
+    # return render(request, "women/contact.html", context=context)
+
+
+def login(request):
+    return HttpResponse("Новая страница")
+    # context = {
+    #     # "title": "О сайте",
+    #     # "menu": menu,
+    # }
+    # return render(request, "women/login.html", context=context)
 
 
 def pageNotFound(request, exception):
