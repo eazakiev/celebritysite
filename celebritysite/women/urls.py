@@ -1,12 +1,13 @@
 from django.urls import path
 
-from .views import about, addpage, contact, index, login
+from . import views
 
-app_name = "women"
+# app_name = "women"
 urlpatterns = [
-    path("", index, name="home"),
-    path("about/", about, name="about"),
-    path("addpage/", addpage, name="add_page"),
-    path("contact/", contact, name="contact"),
-    path("login/", login, name="login"),
+    path('', views.index, name='home'),
+    path("about/", views.about, name="about"),
+    path("addpage/", views.addpage, name="add_page"),
+    path("contact/", views.contact, name="contact"),
+    path("login/", views.login, name="login"),
+    path('post/<int:post_id>/', views.show_post, name='post'),
 ]

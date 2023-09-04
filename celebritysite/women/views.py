@@ -3,10 +3,10 @@ from django.shortcuts import redirect, render
 
 from .models import Women
 
-menu = [{'title': "О сайте", "url_name": "about"},
-        {'title': "Добавить статью", "url_name": "add_page"},
-        {'title': "Обратная связь", "url_name": "contact"},
-        {'title': "Войти", "url_name": "login"},
+menu = [{'title': "О сайте", 'url_name': "about"},
+        {'title': "Добавить статью", 'url_name': "add_page"},
+        {'title': "Обратная связь", 'url_name': "contact"},
+        {'title': "Войти", 'url_name': "login"},
         ]
 
 
@@ -19,6 +19,10 @@ def index(request):
     }
     return render(request, "women/index.html", context=context)
 
+# def index(request):
+    # posts = Women.objects.all()
+    # return render(request, 'women/index.html', {'posts': posts, 'menu': menu, 'title': 'Главная страница'})
+
 
 def about(request):
     context = {
@@ -29,31 +33,19 @@ def about(request):
 
 
 def addpage(request):
-    return HttpResponse("Новая страница")
-    # context = {
-    # "title": "О сайте",
-    # "menu": menu,
-    # }
-    # return render(request, "women/addpage.html", context=context)
-
+    return HttpResponse("Добавление статьи")
 
 def contact(request):
-    return HttpResponse("Новая страница")
-    # context = {
-    #     # "title": "О сайте",
-    #     # "menu": menu,
-    # }
-    # return render(request, "women/contact.html", context=context)
+    return HttpResponse("Обратная связь")
 
 
 def login(request):
-    return HttpResponse("Новая страница")
-    # context = {
-    #     # "title": "О сайте",
-    #     # "menu": menu,
-    # }
-    # return render(request, "women/login.html", context=context)
+    return HttpResponse("Авторизация")
 
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
+
+
+def show_post(request, post_id):
+    return HttpResponse(f"Отображение статьи с id = {post_id}")
