@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .utils import DataMixin
+from django.core.paginator import Paginator
 
 from women.forms import AddPostForm
 
@@ -39,11 +40,12 @@ class WomenHome(DataMixin, ListView):
 #     return render(request, "women/index.html", context=context)
 
 def about(request):
-    context = {
-        "title": "О сайте",
-        "menu": menu,
-    }
-    return render(request, "women/about.html", context=context)
+    contact_list = Women.objects.all()
+    paginator = Paginator(contact_list, 3)  # Show 3 contacts per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'women/about.html', {'page_obj': page_obj, "title": "О сайте", "menu": menu})
 
 
 class AddPage(LoginRequiredMixin, DataMixin, CreateView):
