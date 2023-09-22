@@ -3,6 +3,10 @@ from django.urls import reverse
 
 
 class Women(models.Model):
+    """Класс модели Women.
+    Args:
+        models (class): _description_
+    """
     title = models.CharField(max_length=255, verbose_name='Заголовок')
     slug = models.SlugField(max_length=255, unique=True,
                             db_index=True, verbose_name='URL')
@@ -18,30 +22,40 @@ class Women(models.Model):
         'Category', on_delete=models.PROTECT, verbose_name='Категории')
 
     def __str__(self):
+        """Возвращает строковое представление модели Women."""
         return self.title
 
     def get_absolute_url(self):
+        """Возвращает путь до модели Women."""
         return reverse("post", kwargs={"post_slug": self.slug})
 
     class Meta:
+        """Метаданные модели Women."""
         verbose_name = 'Известные женщины'
         verbose_name_plural = 'Известные женщины'
         ordering = ['time_create', 'title']
 
 
 class Category(models.Model):
+    """Класс модели Category.
+    Args:
+        models (class): _description_
+    """
     name = models.CharField(
         max_length=100, db_index=True, verbose_name='Категория')
     slug = models.SlugField(max_length=255, unique=True,
                             db_index=True, verbose_name='URL')
 
-    def __str__(self) -> str:
+    def __str__(self):
+        """Возвращает строковое представление модели Category."""
         return self.name
 
     def get_absolute_url(self):
+        """Возвращает путь до модели Category."""
         return reverse("category", kwargs={"cat_slug": self.slug})
 
     class Meta:
+        """Метаданные модели Category."""
         verbose_name = 'Категории'
         verbose_name_plural = 'Категории'
         ordering = ['id']

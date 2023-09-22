@@ -4,6 +4,10 @@ from .models import Category, Women
 
 
 class WomenAdmin(admin.ModelAdmin):
+    """Класс WomenAdmin.
+    Args:
+        admin (class): _description_
+    """
     list_display = ('id', 'title', 'time_create', 'photo', 'is_published')
     list_display_links = ('id', 'title')
     search_fields = ('title', 'content')
@@ -13,6 +17,10 @@ class WomenAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
+    """Класс CategoryAdmin.
+    Args:
+        admin (class): _description_
+    """
     list_display = ('id', 'name')
     list_display_links = ('id', 'name')
     search_fields = ('name',)

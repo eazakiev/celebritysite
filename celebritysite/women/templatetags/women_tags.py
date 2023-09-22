@@ -6,6 +6,7 @@ register = template.Library()
 
 @register.simple_tag(name='getcats')
 def get_categories(filter=None):
+    """Получение списка категорий."""
     if not filter:
         return Category.objects.all()
     else:
@@ -14,6 +15,7 @@ def get_categories(filter=None):
 
 @register.inclusion_tag('women/list_categories.html')
 def show_categories(sort=None, cat_selected=0):
+    """Показать список категорий."""
     if not sort:
         cats = Category.objects.all()
     else:
