@@ -52,7 +52,7 @@ class RegisterUserForm(UserCreationForm):
         label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
     password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(
         attrs={'class': 'form-input'}))
-    captcha = CaptchaField(label='Код')
+    captcha = CaptchaField(label='Введите ответ')
 
     class Meta:
         """Метаданные для формы регистрации пользователя"""
@@ -70,7 +70,7 @@ class LoginUserForm(AuthenticationForm):
         label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password = forms.CharField(
         label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-    captcha = CaptchaField(label='Код')
+    captcha = CaptchaField(label='Введите ответ')
 
 
 class ContactForm(forms.Form):
@@ -81,5 +81,5 @@ class ContactForm(forms.Form):
     name = forms.CharField(label='Имя', max_length=255)
     email = forms.EmailField(label='Email')
     content = forms.CharField(
-        widget=forms.Textarea(attrs={'cols': 60, 'rows': 10}))
-    captcha = CaptchaField(label='Код')
+        label='Содержание', widget=forms.Textarea(attrs={'cols': 60, 'rows': 10}))
+    captcha = CaptchaField(label='Введите ответ')
