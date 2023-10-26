@@ -5,12 +5,13 @@ from django.views.generic import ListView, DetailView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout, login
-from women.forms import RegisterUserForm, ContactForm
+from .serializers import WomenSerializer
+from .forms import RegisterUserForm, ContactForm, AddPostForm, LoginUserForm
 from .utils import DataMixin
 from django.core.paginator import Paginator
-from women.forms import AddPostForm, LoginUserForm
 from .models import Category, Women
 from .utils import *
+from rest_framework import generics
 
 
 class WomenHome(DataMixin, ListView):
@@ -53,7 +54,7 @@ def about(request):
 
     page_number = request.GET.get('page')
     # page_obj = paginator.get_page(page_number) 'page_obj': page_obj,
-    return render(request, 'women/about.html', { "title": "О сайте", "menu": menu})
+    return render(request, 'women/about.html', {"title": "О сайте", "menu": menu})
 
 
 class AddPage(LoginRequiredMixin, DataMixin, CreateView):
@@ -200,3 +201,8 @@ def logout_user(request):
     """Получение перенаправления после авторизации пользователя"""
     logout(request)
     return redirect('login')
+
+
+class WomenAPIView(generics.ListAPIView):
+    queryset = Women.objects.all()
+    serializer_class = WomenSerializer

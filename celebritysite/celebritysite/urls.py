@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from women.views import pageNotFound
+from women.views import WomenAPIView, pageNotFound
 
 from celebritysite import settings
 
@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('captcha/', include('captcha.urls')),
     path('', include('women.urls')),
+    path('api/v1/womenlist/', WomenAPIView.as_view()),
 ]
 
 if settings.DEBUG:

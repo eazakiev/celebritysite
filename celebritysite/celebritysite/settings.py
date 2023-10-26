@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'captcha',
     'women.apps.WomenConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
@@ -111,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -152,6 +154,6 @@ CACHES = {
 #         "LOCATION": "/var/tmp/celeb_cache",
 #     }
 # }
-CAPTCHA_FONT_SIZE = 30
+CAPTCHA_FONT_SIZE = 50
 CAPTCHA_FOREGROUND_COLOR = '#343695'
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
